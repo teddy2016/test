@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- 
+  <mappers>
+    <mapper resource="mappers/adminipMapper.xml"/>
+  </mappers>
+  -->
+	<settings>
+		<setting name="callSettersOnNulls" value="true"/>
+	</settings>
+    <typeAliases>
+		<typeAlias alias="adminipVO" type="com.www.test.vo.AdminipVO"/>
+    </typeAliases>
+</configuration>

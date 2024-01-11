@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.www.test.mapper.AdminipMapper">
+
+	<select id="selectAdminipList" resultType="adminipVO" parameterType="adminipVO">
+			SELECT *				
+			FROM adminip
+			WHERE ai_ip <![CDATA[ <> ]]> 'all'
+			ORDER BY ai_idx Desc
+	</select>
+	
+	<select id="selectAdminipListCheck" resultType="adminipVO" parameterType="adminipVO">
+			SELECT ai_ip				
+			FROM adminip
+			WHERE ai_state = 1 And ai_ip <![CDATA[ <> ]]> 'all'
+	</select>
+
+	<insert id="insertAdminip" parameterType="adminipVO">
+		INSERT INTO adminip (
+			ai_ip, ai_content, ai_state, ai_writedate		  
+		) VALUE (
+			#{ai_ip}, #{ai_content}, #{ai_state}, SYSDATE()
+		)
+	</insert>
+	
+	<update id="updateAdminip" parameterType="adminipVO">
+		UPDATE adminip SET
+			ai_ip = #{ai_ip}, ai_content = #{ai_content}, ai_state = #{ai_state}, ai_writedate = SYSDATE()
+		WHERE ai_idx = #{ai_idx}
+	</update>
+	
+	<update id="updateAdminipAllState" parameterType="adminipVO">
+		UPDATE adminip SET
+			ai_state = #{ai_state}, ai_writedate = SYSDATE()
+		WHERE ai_ip = 'all'
+	</update>
+	
+	<delete id="deleteAdminip" parameterType="adminipVO">
+		DELETE FROM adminip WHERE ai_idx = #{ai_idx}
+	</delete>
+	
+	<select id="getAdminipAll" resultType="adminipVO" parameterType="adminipVO">
+		SELECT ai_state
+		FROM adminip
+		WHERE ai_ip = 'all'
+	</select>
+	
+</mapper>
